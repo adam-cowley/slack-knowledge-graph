@@ -1,0 +1,8 @@
+create constraint on (c:User) ASSERT c.id IS UNIQUE;
+CREATE CONSTRAINT ON (n:Channel) ASSERT n.id IS UNIQUE;
+CREATE CONSTRAINT ON (n:Channel) ASSERT n.name IS UNIQUE;
+create constraint on (c:Team) ASSERT c.id IS UNIQUE;
+CREATE CONSTRAINT ON (n:Message) ASSERT n.id IS UNIQUE;
+CREATE CONSTRAINT ON (n:Attachment) ASSERT n.id IS UNIQUE;
+CREATE CONSTRAINT ON (n:Reaction) ASSERT n.id IS UNIQUE;
+CREATE CONSTRAINT ON (n:Emoji) ASSERT n.name IS UNIQUE;
