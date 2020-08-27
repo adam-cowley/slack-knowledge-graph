@@ -61,4 +61,5 @@ FOREACH (_ IN CASE WHEN value.tz IS NOT NULL THEN [1] ELSE [] END |
     MERGE (t:TimeZone {id: value.tz})
     ON CREATE SET t.offset = value.offset, t.label = value.tz_label
     MERGE (u)-[:IN_TIMEZONE]->(t)
-)
+);
+

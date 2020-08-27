@@ -22,7 +22,7 @@ const cypher = `
         createdAt: datetime({epochSeconds: toInteger(value.ts)})
     }
     MERGE (u)-[:POSTED]->(m)
-    MERGE (m)-[:IN_CHANNEL]->(c)
+    MERGE (m)-[in:IN_CHANNEL]->(c)
 
     FOREACH (_ IN CASE WHEN value.edited IS NOT NULL THEN [1] ELSE [] END |
         MERGE (e:User {id: value.edited.user})
@@ -60,6 +60,14 @@ const cypher = `
 
             MERGE (m)-[:HAS_ATTACHMENT]->(a)
         )
+    )
+
+    FOREACH (_ IN CASE WHEN value.thread_ts IS NOT NULL AND value.thread_ts <> value.ts THEN [1] ELSE [] END |
+        DELETE in
+        SET m:ThreadedMessage
+        MERGE (orig:Message {id: value.thread_ts})
+        MERGE (m)-[:IN_REPLY_TO]->(orig)
+
     )
 `
 

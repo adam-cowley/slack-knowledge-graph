@@ -22,4 +22,4 @@ MERGE (u)-[:CREATED]->(c)
 FOREACH (id IN value.members |
     MERGE (m:User {id: id})
     MERGE (m)-[:MEMBER_OF]->(c)
-)
+);
